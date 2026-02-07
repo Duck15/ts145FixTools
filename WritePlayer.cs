@@ -277,6 +277,16 @@ internal class WritePlayer
     #region 复制世界文件方法
     private static void CopyWorld(string exportDir)
     {
+        // 判断是否是 自动备份 操作 调用的此方法，
+        // 自动备份只用于恢复玩家plr文件，不复制世界文件，避免占用过多磁盘空间
+        bool isWorldAutoSave = exportDir.StartsWith(AutoSaveDir);
+        
+        // 如果是自动备份，则直接返回，不复制世界文件
+        if (isWorldAutoSave && !Config.AutoSaveWorld)
+        {
+            return;
+        }
+
         // 复制世界文件
         string worldPath = Path.Combine(typeof(TShock).Assembly.Location, "world");
         if (Directory.Exists(worldPath))

@@ -555,8 +555,11 @@ public partial class FixTools : TerrariaPlugin
                 plr.SendMessage($"{TextGradient(string.Join("\n", Config.MotdMess2), plr: plr)}", color);
             plr.RemoveData("motd2");
             plr.SetData("motd3", DateTime.Now);
+            return; //fix: 避免在同一帧内同时显示motd2和motd3的消息，导致消息混乱
         }
 
+        // fix: 添加空值检查，避免玩家在没有motd3数据时触发异常
+        var motd3Time = plr.GetData<DateTime?>("motd3");
         TimeSpan sendTime = DateTime.Now - plr.GetData<DateTime?>("motd3")!.Value;
         if (sendTime.TotalSeconds > 1)
         {

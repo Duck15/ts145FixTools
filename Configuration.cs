@@ -7,6 +7,8 @@ namespace FixTools;
 
 internal class Configuration
 {
+
+
     [JsonProperty("自建GM权限组", Order = 0)]
     public bool AutoAddGM { get; set; } = true;
     [JsonProperty("跨版本进服", Order = 1)]
@@ -14,7 +16,9 @@ internal class Configuration
     [JsonProperty("自动修复地图缺失", Order = 2)]
     public bool AutoFixWorld { get; set; } = true;
 
-    [JsonProperty("自动备份存档", Order = 3)]
+    [JsonProperty("自动备份世界存档", Order = 3)]
+    public bool AutoSaveWorld { get; set; } = true;
+    [JsonProperty("自动备份玩家存档", Order = 3)]
     public bool AutoSavePlayer { get; set; } = true;
     [JsonProperty("自动备份数据库", Order = 4)]
     public bool AutoSaveSqlite { get; set; } = true;
